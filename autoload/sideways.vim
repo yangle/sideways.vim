@@ -29,6 +29,14 @@ function! sideways#MoveLeft()
     return 0
   endif
 
+  if active_index == 0 && len(items) > 2
+    while active_index < last_index
+      call sideways#MoveRight()
+      let active_index += 1
+    endwhile
+    return 1
+  endif
+
   if active_index == 0
     let first            = items[active_index]
     let second           = items[last_index]
@@ -57,6 +65,14 @@ function! sideways#MoveRight()
   let active_index = s:FindActiveItem(items)
   if active_index < 0
     return 0
+  endif
+
+  if active_index == last_index && len(items) > 2
+    while active_index > 0
+      call sideways#MoveLeft()
+      let active_index -= 1
+    endwhile
+    return 1
   endif
 
   if active_index == last_index
