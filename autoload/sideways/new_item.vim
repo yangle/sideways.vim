@@ -128,6 +128,7 @@ function! s:BuildDelimiterString(definition)
     return ' '
   else
     let delimiter_pattern = definition.delimiter
+    let delimiter_pattern = substitute(delimiter_pattern, '|\\\\\\_\=s\*\=', '|\', 'g')
     return substitute(delimiter_pattern, '\\_\=s\*\=', ' ', 'g')
   endif
 endfunction
